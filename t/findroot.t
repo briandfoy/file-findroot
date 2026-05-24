@@ -1,4 +1,4 @@
-use v5.38;
+use v5.36;
 use utf8;
 use lib qw(blib/lib lib);
 
@@ -119,11 +119,17 @@ subtest 'good runs' => sub {
 	};
 
 subtest 'unsuccessful runs' => sub {
+	open my $cfh, '>:utf8', \my $carped;
+
 	subtest 'starting dir does not exist' => sub {
+		$carped = '';
+		local *STDERR = $cfh;
+
 		my $start_at = catfile( qw(foo bar baz a x t 0 1), $$, time );
 		ok ! -e $start_at, 'starting directory does not exist (good)';
 		my $rc = $class->$method('.git', { start_at => $start_at } );
 		ok ! defined $rc, 'returns empty list for missing starting directory';
+		like $carped, qr/does not exist/, 'got expected carp message';
 		};
 
 	subtest 'target does not exist' => sub {
@@ -231,7 +237,7 @@ subtest 'debug' => sub {
 	};
 
 TODO: {
-local $TODO = ''
+local $TODO = 'HAve not checked Windows yet';
 
 subtest windows => sub {
 	pass();

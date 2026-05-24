@@ -1,4 +1,4 @@
-use v5.42;
+use v5.36;
 use utf8;
 
 package File::FindRoot;
