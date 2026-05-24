@@ -1,5 +1,5 @@
 Changes
-examples/placeholder.pl
+examples/simple.pl
 INSTALL.SKIP
 lib/File/FindRoot.pm
 LICENSE
@@ -13,5 +13,4 @@ t/load.t
 t/pod.t
 t/pod_coverage.t
 t/test_manifest
-tester.pl
 xt/changes.t
